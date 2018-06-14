@@ -1,0 +1,42 @@
+﻿Guide cấu hình virtualhost chạy web fpt-software-develop.com ///123
+
+Step 1) Mở C:\xampp\apache\conf\httpd.conf
+	Bỏ comment dòng:
+	#Virtual hosts
+	Include conf/extra/httpd-vhosts.conf
+
+Step 2) xampp\apache\conf\extra\httpd-vhosts.conf
+Thêm vào:
+
+	<VirtualHost *:80>
+	    ServerName fpt-software.loc     #<==============Chú ý là có www.
+
+	    ServerAdmin fpt-software@fpt-software.loc
+	    DocumentRoot "C:/xampp/htdocs/fpt-software.loc"
+	    
+	    ErrorLog "logs/fpt-software.loc-error_log"
+	    CustomLog "logs/fpt-software.loc-access_log" common
+	    <Directory "C:/xampp/htdocs/fpt-software.loc">
+	        Options Indexes FollowSymLinks
+	        AllowOverride All
+	        Order allow,deny
+	        Allow from all
+	        Require all granted
+	   </Directory>
+	</VirtualHost>
+
+
+Step 3) C:\WINDOWS\system32\drivers\etc\ Open file "hosts" và thêm:
+
+
+127.0.0.1 fpt-software.loc
+
+
+Chú ý: Nếu Windows báo không cho lưu file "hosts" thì copy ra Desktop chỉnh sửa xong thì copy đè lại vào C:\WINDOWS\system32\drivers\etc\hosts
+
+Step 4) Khởi động lại XAMPP và mở trên trình duyệt Firefox (Nếu Chrome thì nó sẽ báo lỗi bảo mật dùng https, có thể click vào Process unsafe):
+
+http://fpt-software.loc
+
+
+
